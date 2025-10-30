@@ -1,0 +1,40 @@
+import amqp from "amqplib";
+
+async function producer() {
+    const connection = await amqp.connect("amqp://localhost");
+    const channel = await connection.createChannel();
+
+    const queueHello = "hello";
+    const queueProducts = "products";
+
+
+    await channel.assertQueue(queueHello);
+    await channel.assertQueue(queueProducts);
+
+    // aqui foi feito o binding da fila products com a exchange amp.fanout
+
+
+    const messages = new Array(10000).fill(0).map((_, i) => ({
+        id: i,
+        name: `Product ${i}`,
+        price: Math.floor(Math.random() * 100),
+    }));
+
+    await Promise.all(
+        messages.map((message) => {
+            return channel.publish('amq.fanout', '', Buffer.from(JSON.stringify(message)), {
+                contentType: "application/json",
+            });
+        })
+    );
+    console.log(`[x] Sent messages`);
+
+    // resultado: as mensagens foram enviadas para a exchange e entregues para a fila products e nao pra fila hello
+    // pq a filha hello nao esta ligada a exchange amq.fanout pelo padrao pub/sub
+    setTimeout(() => {
+        connection.close();
+        process.exit(0);
+    }, 500);
+}
+
+producer().catch(console.error);
