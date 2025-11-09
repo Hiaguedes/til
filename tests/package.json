@@ -1,0 +1,16 @@
+{
+  "name": "tests",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "vitest": "^4.0.8"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
