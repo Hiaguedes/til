@@ -27,7 +27,7 @@ export class DateRange {
         return this.endDate
     }
 
-    totalNights(): number {
+    getTotalNights(): number {
         const millisecondsPerDay = 1000 * 60 * 60 * 24
         const diffInMs = this.endDate.getTime() - this.startDate.getTime()
         return Math.ceil(diffInMs / millisecondsPerDay)

@@ -37,7 +37,7 @@ describe('Date Range Value Object', () => {
     //         endDate: new Date('2024-01-11'),
     //     })
 
-    //     expect(dateRange.totalNights()).toBe(10);
+    //     expect(dateRange.getTotalNights()).toBe(10);
     // }); // teste fragil pois testo apenas um range especifico
 
     it.each([ // no vitest pra iterar por diversos casos de teste especificos
@@ -54,7 +54,7 @@ describe('Date Range Value Object', () => {
                 startDate: new Date(start),
                 endDate: new Date(end),
             })
-            expect(dateRange.totalNights()).toBe(expectedNights)
+            expect(dateRange.getTotalNights()).toBe(expectedNights)
         }
     )
 
