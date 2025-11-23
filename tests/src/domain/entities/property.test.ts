@@ -95,4 +95,32 @@ describe("Property Entity", () => {
             const totalPrice = property.calculateTotalPrice(dateRange);
             expect(totalPrice).toBe(expected);
         });
+
+    it('should add and get bookings correctly', () => {
+        const property = new Property({
+            id: "property-1",
+            address: "123 Main St",
+            description: "A lovely property",
+            maxGuests: 4,
+            pricePerNight: 100,
+            name: "Cozy Cottage",
+        });
+        const bookingMock = {
+            Id: "booking-1",
+            Status: 'CONFIRMED',
+            Period: new DateRange({
+                startDate: new Date('2024-01-01'),
+                endDate: new Date('2024-01-05'),
+            }),
+            confirmBooking: function () {
+                this.Status = 'CONFIRMED';
+            }
+        } as any;
+        property.addBooking(bookingMock);
+
+        expect(property.Bookings.length).toBe(1);
+        expect(property.Bookings[0].Id).toBe("booking-1");
+    });
+
+
 });

@@ -1,3 +1,6 @@
+import { DateRange } from "../ValueObject/dateRange";
+import type { Booking } from "./booking";
+
 export type PropertyProps = {
     id: string;
     address: string;
@@ -14,6 +17,7 @@ export class Property {
     private readonly maxGuests: number;
     private readonly pricePerNight: number;
     private readonly name: string;
+    private readonly bookings: Booking[] = [];
 
     constructor(props: PropertyProps) {
         this.validateParams({ ...props });
@@ -67,6 +71,20 @@ export class Property {
 
         const total = this.pricePerNight * nights;
         return total - (total * discount);
+    }
+
+    isAvailable(requestedPeriod: { startDateValue: Date; endDateValue: Date }): boolean {
+        console.log(this.bookings);
+        return !this.bookings.some(booking => booking.Status === 'CONFIRMED' && booking.Period.overlaps(new DateRange({ startDate: requestedPeriod.startDateValue, endDate: requestedPeriod.endDateValue })));
+    }
+
+    addBooking(booking: Booking): void {
+        booking.confirmBooking();
+        this.bookings.push(booking);
+    }
+
+    get Bookings() {
+        return this.bookings;
     }
 
     get Id() {
