@@ -1,3 +1,4 @@
+import { RefundRuleFactory } from "../cancelation/refundFactory"
 import type { DateRange } from "../ValueObject/dateRange"
 import type { Property } from "./property"
 import type { User } from "./user"
@@ -68,16 +69,8 @@ export class Booking {
         const timeDiff = checkInDate.getTime() - dateOfCancellation.getTime();
         const daysBeforeCheckIn = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-        if (daysBeforeCheckIn >= 7) {
-            // Full refund
-            this.totalPrice = 0;
-        } else if (daysBeforeCheckIn > 1 && daysBeforeCheckIn < 7) {
-            // 50% refund
-            this.totalPrice *= 0.5;
-        } else {
-            // No refund
-            this.totalPrice = this.totalPrice;
-        }
+        this.totalPrice = RefundRuleFactory.getRefundRule(daysBeforeCheckIn).calculateRefund(this.totalPrice);
+
     }
 
     get TotalPrice() {
