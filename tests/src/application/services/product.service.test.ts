@@ -1,7 +1,7 @@
 import { beforeEach, describe, it, expect } from "vitest";
 import { ProductService } from "./product.service";
-import { MockPropertyRepository } from "../infra/repositories/property.repository.mock";
-import { Property } from "../domain/entities/property";
+import { MockPropertyRepository } from "../../infra/repositories/property.repository.mock";
+import { Property } from "../../domain/entities/property";
 
 describe('Product Service', () => {
     let propertyService: ProductService;

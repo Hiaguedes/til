@@ -1,5 +1,5 @@
-import { Property } from "../domain/entities/property";
-import type { IPropertyRepository } from "../domain/repositories/property.repository";
+import { Property } from "../../domain/entities/property";
+import type { IPropertyRepository } from "../../domain/repositories/property.repository";
 
 export class ProductService {
     private readonly propertyRepository: IPropertyRepository

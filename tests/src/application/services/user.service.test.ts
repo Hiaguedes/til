@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { UserService } from "./user.service";
-import { MockUserRepository } from "../infra/repositories/user.repository.mock";
-import { User } from "../domain/entities/user";
+import { MockUserRepository } from "../../infra/repositories/user.repository.mock";
+import { User } from "../../domain/entities/user";
 
 describe("User Service", () => {
 

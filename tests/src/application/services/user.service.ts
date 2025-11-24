@@ -1,5 +1,5 @@
-import type { User } from "../domain/entities/user";
-import type { IUserRepository } from "../domain/repositories/user.repository";
+import type { User } from "../../domain/entities/user";
+import type { IUserRepository } from "../../domain/repositories/user.repository";
 
 export class UserService {
     private readonly userRepository: IUserRepository
