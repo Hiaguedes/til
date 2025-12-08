@@ -1,15 +1,15 @@
 import { beforeEach, describe, it, expect } from "vitest";
-import { ProductService } from "./product.service";
+import { PropertyService } from "./property.service";
 import { MockPropertyRepository } from "../../infra/repositories/property.repository.mock";
 import { Property } from "../../domain/entities/property";
 
 describe('Product Service', () => {
-    let propertyService: ProductService;
+    let propertyService: PropertyService;
     let mockPropertyRepository: MockPropertyRepository;
 
     beforeEach(() => {
         mockPropertyRepository = new MockPropertyRepository()
-        propertyService = new ProductService({
+        propertyService = new PropertyService({
             repository: mockPropertyRepository
         })
     })
@@ -19,7 +19,7 @@ describe('Product Service', () => {
     ])
         ("should throw error if param $param is incorrect", ({ errorMessage, props: { repository } }) => {
             expect(() => {
-                new ProductService({ repository: repository as unknown as any });
+                new PropertyService({ repository: repository as unknown as any });
             }).toThrowError(errorMessage);
         });
 

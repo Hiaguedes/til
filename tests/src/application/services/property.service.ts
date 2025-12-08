@@ -1,7 +1,7 @@
 import { Property } from "../../domain/entities/property";
 import type { IPropertyRepository } from "../../domain/repositories/property.repository";
 
-export class ProductService {
+export class PropertyService {
     private readonly propertyRepository: IPropertyRepository
 
     constructor(props: { repository: IPropertyRepository }) {
