@@ -9,5 +9,6 @@ export default defineConfig({
             // or directories where there is a config file
             'src/*',
         ],
+        setupFiles: ['./vitest.setup.ts'],
     },
 })

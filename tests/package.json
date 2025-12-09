@@ -8,12 +8,17 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/node": "^24.10.2",
+    "@types/uuid": "^11.0.0",
     "vitest": "^4.0.8"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
+    "reflect-metadata": "^0.2.2",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.28",
     "uuid": "^13.0.0"
   }
 }
