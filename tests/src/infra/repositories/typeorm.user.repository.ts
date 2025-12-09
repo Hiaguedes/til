@@ -2,6 +2,7 @@ import type { Repository } from "typeorm";
 import type { IUserRepository } from "../../domain/repositories/user.repository";
 import { User } from "../../domain/entities/user";
 import { UserEntity } from "../persistance/entities/user.entity";
+import { UserMapper } from "../persistance/mappers/user.mapper";
 
 export class TypeORMUserRepository implements IUserRepository {
     private readonly repository: Repository<UserEntity>;
@@ -22,13 +23,11 @@ export class TypeORMUserRepository implements IUserRepository {
         if (!userEntity) {
             return null;
         }
-        return new User({ id: userEntity.id, name: userEntity.name });
+        return UserMapper.toDomain(userEntity);
     }
 
     async save(user: User): Promise<void> {
-        const userEntity = new UserEntity();
-        userEntity.id = user.Id;
-        userEntity.name = user.Name;
+        const userEntity = UserMapper.toPersistanceEntity(user);
 
         await this.repository.save(userEntity);
     }
